@@ -29,7 +29,7 @@ jobs:
       - run: |
           echo check: ${{ steps.check.outputs }}
           echo check: ${{ steps.check.outputs != 0 }}
-          echo check: ${{ steps.check.outputs != "" }}
+          echo check: ${{ steps.check.outputs != '' }}
           git config --global user.name "hashicorp"
           git config --global user.email "hello@hashicorp.com"
           git add .
