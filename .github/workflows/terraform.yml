@@ -24,12 +24,12 @@ jobs:
       
       - name: check format
         id: check
-        run: git status -s
+        run: echo "check=$((git status -s))" >> $GITHUB_OUTPUT
         
       - run: |
-          echo check: ${{ steps.check.outputs }}
-          echo check: ${{ steps.check.outputs != 0 }}
-          echo check: ${{ steps.check.outputs != '' }}
+          echo check: ${{ steps.check.outputs.check }}
+          echo check: ${{ steps.check.outputs.check != 0 }}
+          echo check: ${{ steps.check.outputs.check != '' }}
           git config --global user.name "hashicorp"
           git config --global user.email "hello@hashicorp.com"
           git add .
