@@ -6,8 +6,8 @@ on:
       - main
 
 permissions:
-  pull-requests: write
-  contents: write
+  pull-requests: read|write
+  contents: read|write
 
 jobs:
   Terraform:
