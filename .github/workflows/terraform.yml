@@ -17,10 +17,12 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
+          
+      - run: git fetch origin ${{ github.base_ref }}
 
       - uses: hashicorp/setup-terraform@v2
       
-      - run: terraform fmt -recursive
+      - run: git diff ${{ github.base_ref }} --name-only | xargs terraform fmt
       
       - name: check format
         id: check
