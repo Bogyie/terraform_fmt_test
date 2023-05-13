@@ -19,12 +19,11 @@ jobs:
           fetch-depth: 0
 
       - uses: hashicorp/setup-terraform@v2
-      
       - run: terraform fmt -recursive
       
       - run: |
-          git config --global user.email "github-actions@github.com"
-          git config --global user.name "github-actions"
+          git config --global user.name "hashicorp"
+          git config --global user.email "hello@hashicorp.com"
           git add .
           git commit --amend --no-edit
           git push -f
