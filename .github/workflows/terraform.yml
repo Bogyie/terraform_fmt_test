@@ -24,7 +24,7 @@ jobs:
       
       - name: check format
         id: check
-        run: git add . -s
+        run: git status -s
         
       - run: |
           git config --global user.name "hashicorp"
