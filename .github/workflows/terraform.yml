@@ -19,11 +19,17 @@ jobs:
           fetch-depth: 0
 
       - uses: hashicorp/setup-terraform@v2
+      
       - run: terraform fmt -recursive
       
+      - name: check format
+        id: check
+        run: git add . -s
+        
       - run: |
           git config --global user.name "hashicorp"
           git config --global user.email "hello@hashicorp.com"
           git add .
           git commit --amend --no-edit
           git push -f
+        if: ${{ steps.check.outputs != 0 }}
