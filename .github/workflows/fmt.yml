@@ -20,16 +20,20 @@ jobs:
 
       - uses: hashicorp/setup-terraform@v2
       
-      - run: git diff --name-only HEAD^ | grep -i .tf$ | xargs terraform fmt
+      - id: fmt
+        name: Formatting for changed terraform files
+        run: git diff --name-only HEAD^ | grep -i .tf$ | xargs terraform fmt
       
-      - name: check format
-        id: check
+      - id: check
+        name: Check that a formatted terraform file exists
         run: echo "check=$(git status -s)" >> $GITHUB_OUTPUT
         
-      - run: |
+      - id: push
+        name: Commit and push if formatted terraform files
+        if: ${{ steps.check.outputs.check != '' }}
+        run: |
           git config --global user.name "github-action"
           git config --global user.email "github-action@github.com"
           git add .
           git commit --amend --no-edit
           git push -f
-        if: ${{ steps.check.outputs.check != '' }}
