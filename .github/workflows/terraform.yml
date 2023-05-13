@@ -20,7 +20,7 @@ jobs:
 
       - uses: hashicorp/setup-terraform@v2
       
-      - run: git diff --name-only HEAD^ | xargs terraform fmt
+      - run: git diff --name-only HEAD^ | grep -i .tf$ | xargs terraform fmt
       
       - name: check format
         id: check
