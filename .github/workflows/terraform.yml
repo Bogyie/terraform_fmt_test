@@ -15,17 +15,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{ github.base_ref }}
-          fetch-depth: 1
-      
-      - uses: actions/checkout@v3
-        with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
 
       - uses: hashicorp/setup-terraform@v2
       
-      - run: git diff --name-only ${{ github.base_ref }} | xargs terraform fmt
+      - run: git diff --name-only HEAD^ | xargs terraform fmt
       
       - name: check format
         id: check
