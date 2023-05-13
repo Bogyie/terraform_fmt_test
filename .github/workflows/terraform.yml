@@ -22,7 +22,7 @@ jobs:
 
       - uses: hashicorp/setup-terraform@v2
       
-      - run: git diff ${{ github.base_ref }} --name-only | xargs terraform fmt
+      - run: git diff --name-only ${{ github.base_ref }} | xargs terraform fmt
       
       - name: check format
         id: check
