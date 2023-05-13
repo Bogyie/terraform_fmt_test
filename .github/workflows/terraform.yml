@@ -1,0 +1,29 @@
+name: Terraform
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  Terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+      
+      - uses: hashicorp/setup-terraform@v2
+      
+      - run: terraform fmt -recursive
+      
+      - run: |
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
+          git add .
+          git commit --amend --no-edit
+          git push -f
