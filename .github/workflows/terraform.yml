@@ -18,7 +18,7 @@ jobs:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
           
-      - run: git fetch origin ${{ github.base_ref }}
+      - run: git pull ${{ github.base_ref }}
 
       - uses: hashicorp/setup-terraform@v2
       
