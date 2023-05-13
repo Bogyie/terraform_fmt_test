@@ -27,8 +27,8 @@ jobs:
         run: echo "check=$(git status -s)" >> $GITHUB_OUTPUT
         
       - run: |
-          git config --global user.name "hashicorp"
-          git config --global user.email "hello@hashicorp.com"
+          git config --global user.name "github-action"
+          git config --global user.email "github-action@github.com"
           git add .
           git commit --amend --no-edit
           git push -f
