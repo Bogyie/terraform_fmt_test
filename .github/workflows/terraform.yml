@@ -1,0 +1,25 @@
+name: Terraform
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - edited
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  Terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hashicorp/setup-terraform@v2
+      
+      - run: terraform fmt -recursive
+      
+      - run: git commit --amend --no-edit
+      
+      - run: git push -f
