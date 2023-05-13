@@ -6,8 +6,8 @@ on:
       - main
 
 permissions:
-  pull-requests: read|write
-  contents: read|write
+  pull-requests: write
+  contents: write
 
 jobs:
   Terraform:
@@ -15,10 +15,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
+          ref: ${{ github.base_ref }}
+          fetch-depth: 1
+      
+      - uses: actions/checkout@v3
+        with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
-          
-      - run: git pull ${{ github.base_ref }}
 
       - uses: hashicorp/setup-terraform@v2
       
