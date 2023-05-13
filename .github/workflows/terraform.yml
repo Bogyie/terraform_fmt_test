@@ -27,12 +27,9 @@ jobs:
         run: echo "check=$(git status -s)" >> $GITHUB_OUTPUT
         
       - run: |
-          echo check: ${{ steps.check.outputs.check }}
-          echo check: ${{ steps.check.outputs.check != 0 }}
-          echo check: ${{ steps.check.outputs.check != '' }}
           git config --global user.name "hashicorp"
           git config --global user.email "hello@hashicorp.com"
           git add .
           git commit --amend --no-edit
           git push -f
-        if: ${{ steps.check.outputs != 0 }}
+        if: ${{ steps.check.outputs.check != '' }}
