@@ -23,7 +23,7 @@ jobs:
       - id: fmt
         name: Formatting for changed terraform files
         run: |
-          git pull ${{ github.base_ref }}
+          git pull origin/${{ github.base_ref }}
           git diff --name-only ${{ github.base_ref }}
           # git diff --name-only HEAD^ | grep -i .tf$ | xargs -t -I % sh -c  '{ terraform fmt %; }'
       
