@@ -22,7 +22,9 @@ jobs:
       
       - id: fmt
         name: Formatting for changed terraform files
-        run: git diff --name-only HEAD^ | grep -i .tf$ | xargs -t -I % sh -c  '{ terraform fmt %; }'
+        run: |
+          git diff --name-only HEAD^ | grep -i .tf$
+          git diff --name-only HEAD^ | grep -i .tf$ | xargs -t -I % sh -c  '{ terraform fmt %; }'
       
       - id: check
         name: Check that a formatted terraform file exists
