@@ -17,13 +17,14 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
-
+    
       - uses: hashicorp/setup-terraform@v2
       
       - id: fmt
         name: Formatting for changed terraform files
         run: |
-          git diff --name-only HEAD^
+          git pull ${{ github.base_ref }}
+          git diff --name-only ${{ github.base_ref }}
           # git diff --name-only HEAD^ | grep -i .tf$ | xargs -t -I % sh -c  '{ terraform fmt %; }'
       
       - id: check
