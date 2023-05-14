@@ -22,11 +22,7 @@ jobs:
       
       - id: fmt
         name: Formatting for changed terraform files
-        run: git diff --name-only HEAD^ | grep -i .tf$ | xargs terraform fmt -list=true
-      
-      - id: comment
-        name: Comment
-        run: echo ${{ steps.check.outputs }}
+        run: git diff --name-only HEAD^ | grep -i .tf$ | xargs -i terraform fmt {}
       
       - id: check
         name: Check that a formatted terraform file exists
